@@ -1,0 +1,19 @@
+app:
+  - Console: dùng cho schedule(hẹn giờ xử lý logic)
+  - Exceptions: Handle(bắt) lỗi. Dùng trong try{}catch()
+  - Http: Controller,... xử lý dữ liệu, liên lạc với Database
+  - Models: Là M trong MVC đại diện cho 1 table trong DB
+  - Providers: Là trái tim của Laravel, có những middleware(bức tường phải vượt qua), khai báo cáo thư viện hoặc confirm(xác nhận những request không cần khai báo @csrf token)
+boostrap: Nơi khởi tạo larave
+config: Nơi cấu hình để sử dụng trong project
+database: 
+ - factories: Nơi chạy những lệnh để sản sinh ra data fake(dữ liệu giả)
+ - migrations: Nơi viết cấu trúc table để khởi tạo db
+ - seeders: Khai báo cho factories
+- Public: Nơi chứa các thư viện, hoặc hình ảnh, css,...
+resource: Chứa view của laravel
+routes: Nơi chứa những cấu hình url tương ứng với Controller nào,...
+storage: Xem như là bộ nhớ của project, nơi lưu dữ liệu nhập vào của users (hình ảnh, avatar,files,...)
+test: Lưu unit test
+vendor: Nơi lưu giữ pagekage của composer
+.env: config cho việc run project (chạy projcet)
