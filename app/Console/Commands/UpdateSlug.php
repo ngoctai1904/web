@@ -59,6 +59,7 @@ class UpdateSlug extends Command
         $categories = DB::table('categories')->get();
         $authors = DB::table('authors')->get();
         $books = DB::table('books')->get();
+        $listImageBooks = config('const.listImage');
 
         foreach ($categories as $keyCate => $category) {
             $slubCate = $this->make_slug($category->name);
@@ -71,6 +72,9 @@ class UpdateSlug extends Command
         foreach ($books as $keyBook => $book) {
             $bookSlug = $this->make_slug($book->name);
             DB::table('books')->where('id',$book->id)->update(['slug' => $bookSlug]);
+        }
+        for($i = 1; $i < count($books); $i++){
+            DB::table('books')->where('id',$i)->update(['thumbnail' => $listImageBooks[$i]]);
         }
     }
 }
