@@ -54,7 +54,7 @@ class BookController extends Controller
         $bookLike = DB ::table('books')->where('category_id',$book->category_id)->get()->random(4);
         return view('bookDetail', compact('book','author','category','bookLike'));
     }
-    public function list()
+    public function list()                          
     {
         $books = DB::table('books')->paginate(10);
         $categories = DB::table('books')
@@ -66,7 +66,17 @@ class BookController extends Controller
             'categories.slug as slugCate'
             )
         ->get()->groupBy('nameCate');
-        return view('list',['books' => $books, 'categories' => $categories]);
+
+        $authors = DB::table('books')
+        ->join('authors','books.author_id','=','authors.id')
+        ->select(
+            'authors.name as nameAuthor',
+            'books.name as nameBook',
+            'author_id',
+            'authors.slug as slugAuthor'
+            )
+        ->get()->groupBy('nameAuthor');
+        return view('list',['books' => $books, 'categories' => $categories,'authors' => $authors]);  
     }
     /**
      * Show the form for editing the specified resource.

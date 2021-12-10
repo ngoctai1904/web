@@ -48,6 +48,7 @@ class CategoryController extends Controller
     {
         $category = DB::table('categories')->where('slug',$slug)->first();
         $books = DB::table('books')->where('category_id',$category->id)->get();
+        
     }
     /**
      * Show the form for editing the specified resource.

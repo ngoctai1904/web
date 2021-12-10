@@ -35,6 +35,16 @@
         </a>
         @endforeach
       </ul>
+      <ul class="list-group">
+        @foreach ($authors as $key => $item)
+        <a href="/authors/{{$item[0]->slugAuthor}}">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{$key}}
+            <span class="badge badge-primary badge-pill">{{count($item)}}</span>
+            </li>
+        </a>
+        @endforeach
+      </ul>
     <h1>List books</h1>
     <div class="row">
         @foreach ($books as $book)

@@ -35,3 +35,6 @@ Route::get('/library',function(){
 
 Route::get('/categories/{slug}' , [CategoryController::class,'show']);
 
+
+
+
