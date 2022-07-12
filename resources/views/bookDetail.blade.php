@@ -17,7 +17,7 @@
                     <div>
                         <h3>Author:{{ $author->name }}</h3>
                     </div>
-                    <h4>Category:{{ $category->name }}</h4>
+                        <h4>Category:{{ $category->name }}</h4>
                     <div>
                         @if (!empty($book->discount))
                             <span class="cl-ff3b3b fs-31 fs-bold" id="product-discount">{{ $book->discount }}
@@ -43,18 +43,18 @@
         <div class="product__inCategory row">
             @foreach ($bookLike as $item)
                 <div class="col-xl-3 col-md-3 col-sm-12 col-12 fs-t-ct pd-b-10" style="border-bottom: none;">
-                    <a href="/books/{{$item->slug}}">
-                        <img src="{{$item->thumbnail}}" alt="">
+                    <a href="/books/{{ $item->slug }}">
+                        <img src="{{ $item->thumbnail }}" alt="">
                     </a>
                     <div>
-                        <h4 class="cl-4e4e4e "><a href="/books/{{$item->slug}}">{{$item->name}}</a></h4>
+                        <h4 class="cl-4e4e4e "><a href="/books/{{ $item->slug }}">{{ $item->name }}</a></h4>
                         <a href="#" class="cl-4e4e4e fs-bold">Author</a>
-                        <p class="cl-4e4e4e">{{$item->since}}</p>
+                        <p class="cl-4e4e4e">{{ $item->since }}</p>
                         @if ($item->discount)
-                        <span class="cl-ff3b3b fs-bold">{{$item->discount}}</span> |
-                        <span class="cl-4e4e4e fs-td-lt">{{$item->price}}</span>
-                        @else 
-                        <span class="cl-4e4e4e fs-td-lt">{{$item->price}}</span>
+                            <span class="cl-ff3b3b fs-bold">{{ $item->discount }}</span> |
+                            <span class="cl-4e4e4e fs-td-lt">{{ $item->price }}</span>
+                        @else
+                            <span class="cl-4e4e4e fs-td-lt">{{ $item->price }}</span>
                         @endif
                     </div>
                 </div>

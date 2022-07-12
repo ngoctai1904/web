@@ -14,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = DB::table("books")->take(8)->get()->toArray();
+        $books = DB::table("books")->orderBy('view','DESC')->take(8)->get();
         // dd($books);
         return view('books', compact('books')); 
     }
@@ -37,7 +37,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        DB::table('users')->delete();
+
+        DB::table('users')->where('votes','>')->delete();
+
     }
 
     /**
@@ -51,12 +55,35 @@ class BookController extends Controller
         $book = DB::table('books')->where('slug',$slug)->first();
         $author = DB::table('authors')->where('id',$book->author_id)->first();
         $category = DB::table('categories')->where('id',$book->category_id)->first();
+        DB::table('books')->where('slug',$slug)->update(['view' => ($book->view + 1)]);
         $bookLike = DB ::table('books')->where('category_id',$book->category_id)->get()->random(4);
+
         return view('bookDetail', compact('book','author','category','bookLike'));
     }
-    public function list()                          
+    public function list(Request $request)                          
     {
-        $books = DB::table('books')->paginate(10);
+        $query = DB::table('books');
+        if($request->name){
+            $paramName = $request->name;
+            $query = $query
+            ->join('categories','books.category_id','=','categories.id')
+            ->join('authors','books.author_id','=','authors.id')
+            ->where(function($query2) use ($paramName){
+                return $query2->where('books.name','like','%'.$paramName.'%')
+                        ->orWhere('authors.name','like','%'.$paramName.'%')
+                        ->orWhere('categories.name','like','%'.$paramName.'%')
+                        ->orWhere('books.since','like','%'.$paramName.'%');
+            })
+            ->select(
+                'categories.name as nameCate',
+                'books.name as name',
+                'authors.name as nameAuthor',
+                'books.thumbnail',
+                'books.slug',
+                'books.price',
+                'books.since'
+            );
+        }
         $categories = DB::table('books')
         ->join('categories','books.category_id','=','categories.id')
         ->select(
@@ -76,6 +103,8 @@ class BookController extends Controller
             'authors.slug as slugAuthor'
             )
         ->get()->groupBy('nameAuthor');
+
+        $books = $query->paginate(12);
         return view('list',['books' => $books, 'categories' => $categories,'authors' => $authors]);  
     }
     /**

@@ -47,9 +47,11 @@ class CategoryController extends Controller
     public function show($slug)
     {
         $category = DB::table('categories')->where('slug',$slug)->first();
-        $books = DB::table('books')->where('category_id',$category->id)->get();
-        
+        $books = DB::table('books')->where('category_id',$category->id)->paginate(12);
+        return view('categoriesBook', compact('books','category'));
+
     }
+    
     /**
      * Show the form for editing the specified resource.
      *
