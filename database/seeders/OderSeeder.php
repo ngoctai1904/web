@@ -13,6 +13,6 @@ class OderSeeder extends Seeder
      */
     public function run()
     {
-        Author::factory()->times(100)->create();
+        // Author::factory()->times(100)->create();
     }
 }

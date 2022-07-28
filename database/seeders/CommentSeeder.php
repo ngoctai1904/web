@@ -13,6 +13,6 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        Author::factory()->time(500)->create();
+        // Author::factory()->time(500)->create();
     }
 }

@@ -13,6 +13,6 @@ class RateSeeder extends Seeder
      */
     public function run()
     {
-        Author::factory()->times(500)->create();
+        // Author::factory()->times(500)->create();
     }
 }

@@ -19,8 +19,6 @@ class CreateAuthorsTable extends Migration
             $table->timestamp('birthday');
             $table->string('slug');
             $table->longText('story');
-            //timestaps
-            //softdilete(nằm cuối cùng)
             $table->timestamps();
         }); 
     }

@@ -24,11 +24,11 @@ class CreateBooksTable extends Migration
             $table->integer('view')->default(0);
             $table->longText('overview');
             $table->integer('since');
-            $table->bigInteger('author_id');
+            $table->unsignedBigInteger('author_id');
             // Lay author_id nay lien ket toi id trong bang authors
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             // tao ra truong (category_id)
-            $table->bigInteger('category_id');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
