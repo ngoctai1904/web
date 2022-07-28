@@ -3,24 +3,18 @@
     <title>Contacts</title>
 @endsection
 @section('content')
-    <!-- end header -->
-    <div class="about-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <div class="abouttitle">
-                        <h2>Contact Us</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Contact -->
     <div class="Contact">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <form>
+                    @if(Session::get('message_sent'))
+                    <div class ="alert alert-success" role ="alert">
+                        {{Session::get('message_sent')}}
+                    </div>
+                    @endif
+                    <form method="POST action="{{route('contact.send')}} enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <input class="form-control" placeholder="Name" name="name" type="text">

@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->integer('price');
             $table->integer('discount')->nullable();
             $table->integer('amount');
-            $table->integer('view');
+            $table->integer('view')->default(0);
             $table->longText('overview');
             $table->integer('since');
             $table->bigInteger('author_id');

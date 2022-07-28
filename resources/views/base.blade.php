@@ -17,6 +17,7 @@
     <!-- Responsive-->
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- fevicon -->
+    <link rel="icon" href="{{ asset('asset/images/fevicon.png') }}" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.mCustomScrollbar.min.css') }}">
     <!-- Tweaks for older IEs-->
@@ -33,7 +34,7 @@
 
 <body class="main-layout home_page">
     {{-- Slideshow --}}
-    
+
     {{-- end Slideshow --}}
 
 
@@ -52,8 +53,8 @@
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                         <div class="full">
                             <div class="center-desk">
-                                <div class="logo"> <a href="/"><img
-                                        src="{{ asset('assets/images/logo.png') }}" alt="#"></a> </div>
+                                <div class="logo"> <a href="/"><img src="{{ asset('assets/images/logo.png') }}"
+                                            alt="#"></a> </div>
                             </div>
                         </div>
                     </div>
@@ -67,18 +68,13 @@
                                         <li><a href="/books">Our Books</a></li>
                                         <li><a href="/library">library</a></li>
                                         <li><a href="/contact">Contact us</a></li>
-                                        {{-- <li class=" in">
-                                        <form role="search" class="app-search d-none d-md-block me-3">
-                                            <input type="text" placeholder="Search..." class="form-control mt-0">
-                                            <a href="" class="active">
-                                            <i class="fa fa-search"></i>
-                                            </a>
-                                        </form>
-                                        </li> --}}
                                         <li class="mean-last"> <a href="#"><img
-                                                    src="{{ asset('assets/images/search_icon.png') }}" /></a> </li>
+                                            src="{{ asset('assets/images/search_icon.png') }}" /></a> </li>
                                         <li class="mean-last"> <a href="#"><img
-                                                    src="{{ asset('assets/images/top-icon.png') }}" /></a> </li>
+                                            src="{{ asset('assets/images/top-icon.png') }}" /></a> </li>
+                                        
+                                        <li class="mean-last"> <a href="{{ route('cart.list') }}">
+                                            <i class="fa fa-shopping-cart"></i>{{ Cart::count() }}</a> </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -91,6 +87,53 @@
         <!-- end header inner -->
     </header>
     <!-- end header -->
+    <section class="slider_section">
+        <div id="myCarousel" class="carousel slide banner-main" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="first-slide" src="{{ asset('assets/images/banner.jpg') }}" alt="First slide">
+                    <div class="container">
+                        <div class="carousel-caption relative">
+                            <h1>The Best Libraries That<br> Every Book Lover Must<br> Visit!</h1>
+                            <p>adipiscing elit, sed do eiusmod tempor incididunt ut<br> labore et dolore magna aliqua.
+                                Ut enim ad minim<br> veniam, quis nostrud exercitation </p>
+                            <div class="button_section"> <a class="main_bt" href="{{ route('front-list') }}">Read More</a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="second-slide" src="{{ asset('assets/images/banner.jpg') }}" alt="Second slide">
+                    <div class="container">
+                        <div class="carousel-caption relative">
+                            <h1>The Best Libraries That<br> Every Book Lover Must<br> Visit!</h1>
+                            <p>adipiscing elit, sed do eiusmod tempor incididunt ut<br> labore et dolore magna aliqua.
+                                Ut enim ad minim<br> veniam, quis nostrud exercitation </p>
+                            <div class="button_section"> <a class="main_bt" href="{{ route('front-list') }}">Read More</a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="third-slide" src="{{ asset('assets/images/banner.jpg') }}" alt="Third slide">
+                    <div class="container">
+                        <div class="carousel-caption relative">
+                            <h1>The Best Libraries That<br> Every Book Lover Must<br> Visit!</h1>
+                            <p>adipiscing elit, sed do eiusmod tempor incididunt ut<br> labore et dolore magna aliqua.
+                                Ut enim ad minim<br> veniam, quis nostrud exercitation </p>
+                            <div class="button_section"> <a class="main_bt" href="{{ route('front-list') }}">Read More</a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
     @yield('content')
     <!-- footer -->
     <footer>

@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Milano</title>
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/img/brand/favicon.png') }}" type="image/png">
@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}"
         type="text/css">
     <!-- Page plugins -->
-    <!-- Argon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0" type="text/css') }}">
 </head>
 
@@ -40,7 +39,7 @@
         @include('admin.common.navBar')
         <!-- Header -->
         <!-- Header -->
-        <div class="content">
+        <div class="content" style="min-height: calc(100vh - 133.9px);">
             @yield('content')
         </div>
         <!-- Footer -->
@@ -58,6 +57,8 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+    @stack('js')
+
 </body>
 
 </html>

@@ -1809,3 +1809,14 @@ ul.location_icon li a{
     font-size: 40px;
 }
 
+.home__books > div {
+    margin-top: 2rem;
+}
+
+.mean-last {
+    position: relative;
+}
+
+.mean-last a{
+    
+}

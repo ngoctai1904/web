@@ -22,9 +22,18 @@ class Book extends Model
         'amount',
         'view',
         'overview',
-        'sine',
-        'description',
-        'status',
+        'since',
+        'author_id',
+        'category_id',
     ];
- 
+
+    public function author()
+    {
+        return $this->hasOne(Author::class, 'id', 'author_id');
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
 }

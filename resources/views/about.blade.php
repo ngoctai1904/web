@@ -3,18 +3,6 @@
     <title>About</title>
 @endsection
 @section('content')
-    <!-- about -->
-    <div class="about-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <div class="abouttitle">
-                        <h2>About Us</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="about">
         <div class="container">
             <div class="row">

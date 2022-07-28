@@ -56,8 +56,17 @@ class BookController extends Controller
         $author = DB::table('authors')->where('id',$book->author_id)->first();
         $category = DB::table('categories')->where('id',$book->category_id)->first();
         DB::table('books')->where('slug',$slug)->update(['view' => ($book->view + 1)]);
-        $bookLike = DB ::table('books')->where('category_id',$book->category_id)->get()->random(4);
-
+        $bookLike = DB ::table('books')
+                    ->select(
+                        'books.*',
+                        'authors.name as authorName',
+                        'categories.name as categoryName'
+                    )
+                    ->leftJoin('authors','authors.id','=','books.author_id')
+                    ->leftJoin('categories','categories.id','=','books.category_id')
+                    ->where('category_id',$book->category_id)
+                    ->get()
+                    ->random(4);
         return view('bookDetail', compact('book','author','category','bookLike'));
     }
     public function list(Request $request)                          
@@ -105,7 +114,10 @@ class BookController extends Controller
         ->get()->groupBy('nameAuthor');
 
         $books = $query->paginate(12);
-        return view('list',['books' => $books, 'categories' => $categories,'authors' => $authors]);  
+        return view('list',['books' => $books, 'categories' => $categories,'authors' => $authors]); 
+        
+        // session()->flash('massage','Product has been updated successfully!');
+        
     }
     /**
      * Show the form for editing the specified resource.
@@ -115,7 +127,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $books = Books::where('id',$id)->first();
+        return view('admin.books.edit',compact('books'));
+
     }
 
     /**
@@ -127,7 +141,50 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $query = DB::table('books');
+        if($request->name){
+            $paramName = $request->name;
+            $query = $query
+            ->join('categories','books.category_id','=','categories.id')
+            ->join('authors','books.author_id','=','authors.id')
+            ->where(function($query2) use ($paramName){
+                return $query2->where('books.name','like','%'.$paramName.'%')
+                        ->orWhere('authors.name','like','%'.$paramName.'%')
+                        ->orWhere('categories.name','like','%'.$paramName.'%')
+                        ->orWhere('books.since','like','%'.$paramName.'%');
+            })
+            ->select(
+                'categories.name as nameCate',
+                'books.name as name',
+                'authors.name as nameAuthor',
+                'books.thumbnail',
+                'books.slug',
+                'books.price',
+                'books.since'
+            );
+        }
+        $categories = DB::table('books')
+        ->join('categories','books.category_id','=','categories.id')
+        ->select(
+            'categories.name as nameCate',
+            'books.name as nameBook',
+            'category_id',
+            'categories.slug as slugCate'
+            )
+        ->get()->groupBy('nameCate');
+
+        $authors = DB::table('books')
+        ->join('authors','books.author_id','=','authors.id')
+        ->select(
+            'authors.name as nameAuthor',
+            'books.name as nameBook',
+            'author_id',
+            'authors.slug as slugAuthor'
+            )
+        ->get()->groupBy('nameAuthor');
+
+        $books = $query->paginate(12);
+        return view('list',['books' => $books, 'categories' => $categories,'authors' => $authors]); 
     }
 
     /**
@@ -138,6 +195,9 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        // $book = Book::find($id);
+        // $book->delete();
+        // session()->flash('massage','Product has been delete successfully!');
     }
 }
