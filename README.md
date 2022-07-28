@@ -1,7 +1,10 @@
 
 ## Setup Project
 
+
 B1: Clone project
+
+
 B2: Copy .envexample  and paste to .env
 B3: Run command: composer i
 B4: Run command: php artisan key:gen
